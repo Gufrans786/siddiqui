@@ -1,0 +1,59 @@
+package com.reactcommunity.rndatetimepicker;
+
+import android.os.Bundle;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import com.facebook.react.bridge.BaseJavaModule;
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.UiThreadUtil;
+import kotlin.Metadata;
+import kotlin.jvm.internal.Intrinsics;
+
+@Metadata(d1 = {"\u0000.\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u000e\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\u0018\u0000 \u000f2\u00020\u0001:\u0001\u000fB\u000f\u0012\u0006\u0010\u0002\u001a\u00020\u0003¢\u0006\u0004\b\u0004\u0010\u0005J\b\u0010\u0006\u001a\u00020\u0007H\u0016J\u0012\u0010\b\u001a\u00020\t2\b\u0010\n\u001a\u0004\u0018\u00010\u000bH\u0016J\u0018\u0010\f\u001a\u00020\t2\u0006\u0010\r\u001a\u00020\u000e2\u0006\u0010\n\u001a\u00020\u000bH\u0016¨\u0006\u0010"}, d2 = {"Lcom/reactcommunity/rndatetimepicker/MaterialTimePickerModule;", "Lcom/reactcommunity/rndatetimepicker/NativeModuleMaterialTimePickerSpec;", "reactContext", "Lcom/facebook/react/bridge/ReactApplicationContext;", "<init>", "(Lcom/facebook/react/bridge/ReactApplicationContext;)V", "getName", "", "dismiss", "", BaseJavaModule.METHOD_TYPE_PROMISE, "Lcom/facebook/react/bridge/Promise;", "open", "params", "Lcom/facebook/react/bridge/ReadableMap;", "Companion", "react-native-community_datetimepicker_release"}, k = 1, mv = {2, 1, 0}, xi = 48)
+public final class MaterialTimePickerModule extends NativeModuleMaterialTimePickerSpec {
+    public static final String NAME = "RNCMaterialTimePicker";
+
+    public MaterialTimePickerModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+        Intrinsics.checkNotNullParameter(reactContext, "reactContext");
+    }
+
+    @Override
+    public String getName() {
+        return "RNCMaterialTimePicker";
+    }
+
+    @Override
+    public void dismiss(Promise promise) {
+        Common.dismissDialog((FragmentActivity) getReactApplicationContext().getCurrentActivity(), "RNCMaterialTimePicker", promise);
+    }
+
+    @Override
+    public void open(final ReadableMap params, final Promise promise) {
+        Intrinsics.checkNotNullParameter(params, "params");
+        Intrinsics.checkNotNullParameter(promise, "promise");
+        FragmentActivity fragmentActivity = (FragmentActivity) getReactApplicationContext().getCurrentActivity();
+        if (fragmentActivity == null) {
+            promise.reject(RNConstants.ERROR_NO_ACTIVITY, "Tried to open a MaterialTimePicker dialog while not attached to an Activity");
+        }
+        Intrinsics.checkNotNull(fragmentActivity);
+        final FragmentManager supportFragmentManager = fragmentActivity.getSupportFragmentManager();
+        Intrinsics.checkNotNullExpressionValue(supportFragmentManager, "getSupportFragmentManager(...)");
+        UiThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public final void run() {
+                MaterialTimePickerModule.open$lambda$0(params, promise, supportFragmentManager, this);
+            }
+        });
+    }
+
+    public static final void open$lambda$0(ReadableMap readableMap, Promise promise, FragmentManager fragmentManager, MaterialTimePickerModule materialTimePickerModule) {
+        Bundle bundleCreateTimePickerArguments = Common.createTimePickerArguments(readableMap);
+        Intrinsics.checkNotNull(bundleCreateTimePickerArguments);
+        ReactApplicationContext reactApplicationContext = materialTimePickerModule.getReactApplicationContext();
+        Intrinsics.checkNotNullExpressionValue(reactApplicationContext, "getReactApplicationContext(...)");
+        new RNMaterialTimePicker(bundleCreateTimePickerArguments, promise, fragmentManager, reactApplicationContext).open();
+    }
+}

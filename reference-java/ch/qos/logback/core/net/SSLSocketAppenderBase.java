@@ -1,0 +1,44 @@
+package ch.qos.logback.core.net;
+
+import ch.qos.logback.core.net.ssl.ConfigurableSSLSocketFactory;
+import ch.qos.logback.core.net.ssl.SSLComponent;
+import ch.qos.logback.core.net.ssl.SSLConfiguration;
+import ch.qos.logback.core.net.ssl.SSLParametersConfiguration;
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLContext;
+
+public abstract class SSLSocketAppenderBase<E> extends AbstractSocketAppender<E> implements SSLComponent {
+    private SocketFactory socketFactory;
+    private SSLConfiguration ssl;
+
+    @Override
+    protected SocketFactory getSocketFactory() {
+        return this.socketFactory;
+    }
+
+    @Override
+    public SSLConfiguration getSsl() {
+        if (this.ssl == null) {
+            this.ssl = new SSLConfiguration();
+        }
+        return this.ssl;
+    }
+
+    @Override
+    public void setSsl(SSLConfiguration sSLConfiguration) {
+        this.ssl = sSLConfiguration;
+    }
+
+    @Override
+    public void start() {
+        try {
+            SSLContext sSLContextCreateContext = getSsl().createContext(this);
+            SSLParametersConfiguration parameters = getSsl().getParameters();
+            parameters.setContext(getContext());
+            this.socketFactory = new ConfigurableSSLSocketFactory(parameters, sSLContextCreateContext.getSocketFactory());
+            super.start();
+        } catch (Exception e) {
+            addError(e.getMessage(), e);
+        }
+    }
+}

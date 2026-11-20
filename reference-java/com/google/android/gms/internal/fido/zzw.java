@@ -1,0 +1,30 @@
+package com.google.android.gms.internal.fido;
+
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
+import com.google.android.gms.fido.u2f.api.common.RegisterRequestParams;
+import com.google.android.gms.fido.u2f.api.common.SignRequestParams;
+
+public final class zzw extends zza implements IInterface {
+    zzw(IBinder iBinder) {
+        super(iBinder, "com.google.android.gms.fido.u2f.internal.regular.IU2fAppService");
+    }
+
+    public final void zzc(zzv zzvVar, RegisterRequestParams registerRequestParams) throws RemoteException {
+        Parcel parcelZza = zza();
+        int i = zzc.zza;
+        parcelZza.writeStrongBinder(zzvVar);
+        zzc.zzd(parcelZza, registerRequestParams);
+        zzb(1, parcelZza);
+    }
+
+    public final void zzd(zzv zzvVar, SignRequestParams signRequestParams) throws RemoteException {
+        Parcel parcelZza = zza();
+        int i = zzc.zza;
+        parcelZza.writeStrongBinder(zzvVar);
+        zzc.zzd(parcelZza, signRequestParams);
+        zzb(2, parcelZza);
+    }
+}

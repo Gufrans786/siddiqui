@@ -1,0 +1,134 @@
+package com.google.android.gms.internal.auth;
+
+import android.content.Context;
+import android.net.Uri;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import javax.annotation.Nullable;
+
+public abstract class zzdc {
+    public static final int zzd = 0;
+
+    @Nullable
+    private static volatile zzda zze = null;
+    private static volatile boolean zzf = false;
+    final zzcz zzb;
+    final String zzc;
+    private final Object zzj;
+    private volatile int zzk = -1;
+    private volatile Object zzl;
+    private static final Object zza = new Object();
+    private static final AtomicReference zzg = new AtomicReference();
+    private static final zzde zzh = new zzde(zzcu.zza);
+    private static final AtomicInteger zzi = new AtomicInteger();
+
+    zzdc(zzcz zzczVar, String str, Object obj, boolean z, zzdb zzdbVar) {
+        if (zzczVar.zza == null) {
+            throw new IllegalArgumentException("Must pass a valid SharedPreferences file name or ContentProvider URI");
+        }
+        this.zzb = zzczVar;
+        this.zzc = str;
+        this.zzj = obj;
+    }
+
+    public static void zzc() {
+        zzi.incrementAndGet();
+    }
+
+    public static void zzd(final Context context) {
+        if (zze != null || context == null) {
+            return;
+        }
+        Object obj = zza;
+        synchronized (obj) {
+            if (zze == null) {
+                synchronized (obj) {
+                    zzda zzdaVar = zze;
+                    Context applicationContext = context.getApplicationContext();
+                    if (applicationContext != null) {
+                        context = applicationContext;
+                    }
+                    if (zzdaVar == null || zzdaVar.zza() != context) {
+                        zzcg.zzd();
+                        zzdd.zzc();
+                        zzco.zze();
+                        zze = new zzcd(context, zzdo.zza(new zzdj() {
+                            @Override
+                            public final Object zza() {
+                                Context context2 = context;
+                                int i = zzdc.zzd;
+                                return zzcp.zza(context2);
+                            }
+                        }));
+                        zzi.incrementAndGet();
+                    }
+                }
+            }
+        }
+    }
+
+    abstract Object zza(Object obj);
+
+    public final Object zzb() {
+        String strZza;
+        zzcl zzclVarZza;
+        Object objZzb;
+        int i = zzi.get();
+        if (this.zzk < i) {
+            synchronized (this) {
+                if (this.zzk < i) {
+                    zzda zzdaVar = zze;
+                    zzdh zzdhVarZzc = zzdh.zzc();
+                    Object objZza = null;
+                    if (zzdaVar != null) {
+                        zzdhVarZzc = (zzdh) zzdaVar.zzb().zza();
+                        if (zzdhVarZzc.zzb()) {
+                            zzci zzciVar = (zzci) zzdhVarZzc.zza();
+                            zzcz zzczVar = this.zzb;
+                            strZza = zzciVar.zza(zzczVar.zza, null, zzczVar.zzc, this.zzc);
+                        } else {
+                            strZza = null;
+                        }
+                    } else {
+                        strZza = null;
+                    }
+                    if (zzdaVar == null) {
+                        throw new IllegalStateException("Must call PhenotypeFlag.init() first");
+                    }
+                    Uri uri = this.zzb.zza;
+                    if (uri != null) {
+                        zzclVarZza = zzcq.zza(zzdaVar.zza(), uri) ? zzcg.zza(zzdaVar.zza().getContentResolver(), this.zzb.zza, new Runnable() {
+                            @Override
+                            public final void run() {
+                                zzdc.zzc();
+                            }
+                        }) : null;
+                    } else {
+                        zzclVarZza = zzdd.zza(zzdaVar.zza(), null, new Runnable() {
+                            @Override
+                            public final void run() {
+                                zzdc.zzc();
+                            }
+                        });
+                    }
+                    Object objZza2 = (zzclVarZza == null || (objZzb = zzclVarZza.zzb(this.zzc)) == null) ? null : zza(objZzb);
+                    if (objZza2 == null) {
+                        if (!this.zzb.zzd) {
+                            String strZzc = zzco.zza(zzdaVar.zza()).zzb(this.zzb.zzd ? null : this.zzc);
+                            if (strZzc != null) {
+                                objZza = zza(strZzc);
+                            }
+                        }
+                        objZza2 = objZza == null ? this.zzj : objZza;
+                    }
+                    if (zzdhVarZzc.zzb()) {
+                        objZza2 = strZza == null ? this.zzj : zza(strZza);
+                    }
+                    this.zzl = objZza2;
+                    this.zzk = i;
+                }
+            }
+        }
+        return this.zzl;
+    }
+}

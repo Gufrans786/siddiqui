@@ -1,0 +1,23 @@
+package androidx.navigation;
+
+import androidx.lifecycle.ViewModelStore;
+import ch.qos.logback.core.net.SyslogConstants;
+import kotlin.Lazy;
+import kotlin.Metadata;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.Lambda;
+
+@Metadata(d1 = {"\u0000\u000e\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\u0010\u0000\u001a\u00020\u0001\"\n\b\u0000\u0010\u0002\u0018\u0001*\u00020\u0003H\n¢\u0006\u0002\b\u0004"}, d2 = {"<anonymous>", "Landroidx/lifecycle/ViewModelStore;", "VM", "Landroidx/lifecycle/ViewModel;", "invoke"}, k = 3, mv = {1, 8, 0}, xi = SyslogConstants.LOG_LOCAL6)
+public final class NavGraphViewModelLazyKt$navGraphViewModels$storeProducer$3 extends Lambda implements Function0<ViewModelStore> {
+    final Lazy<NavBackStackEntry> $backStackEntry$delegate;
+
+    public NavGraphViewModelLazyKt$navGraphViewModels$storeProducer$3(Lazy<NavBackStackEntry> lazy) {
+        super(0);
+        this.$backStackEntry$delegate = lazy;
+    }
+
+    @Override
+    public final ViewModelStore invoke() {
+        return NavGraphViewModelLazyKt.m149navGraphViewModels$lambda2(this.$backStackEntry$delegate).getViewModelStore();
+    }
+}

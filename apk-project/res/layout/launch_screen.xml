@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="@color/white" android:layout_width="match_parent" android:layout_height="match_parent" android:weightSum="2.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="0.0dp" android:layout_weight="1.0">
+        <TextView android:textSize="32.0dp" android:textColor="@color/accent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="60.0dp" android:text="يرجى الانتظار" />
+        <ProgressBar android:id="@id/progressBar" android:layout_width="30.0dp" android:layout_height="30.0dp" android:layout_marginTop="10.0dp" android:indeterminateTint="@color/accent" style="?android:progressBarStyle" />
+    </LinearLayout>
+    <RelativeLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="0.0dp" android:layout_weight="1.0">
+        <ImageView android:id="@id/bottom_logo" android:layout_width="match_parent" android:layout_height="match_parent" android:src="@drawable/bottom_splash" android:scaleType="fitXY" android:cropToPadding="false" />
+        <ImageView android:layout_width="50.0dp" android:layout_height="50.0dp" android:layout_marginBottom="60.0dp" android:src="@mipmap/ic_launcher" android:scaleType="fitXY" android:cropToPadding="false" android:layout_alignBottom="@id/bottom_logo" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "isolatedDeclarations": true,
+    "declaration": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "types": []
+  },
+  "include": ["src"],
+  // The shipped JSX augmentations import framework types the repo does not install; types-matrix/cells/jsx-* check them.
+  "exclude": ["src/jsx"]
+}

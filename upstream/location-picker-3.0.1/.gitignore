@@ -1,0 +1,31 @@
+node_modules/
+dist/
+custom-elements.json
+coverage/
+test-results/
+_site/
+playwright-report/
+blob-report/
+.vitest/
+__screenshots__/
+*.tgz
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+# Local-only example files (may contain API keys; never commit)
+example/*.local.html
+.env
+.env.*
+
+# Compat run outputs (workflow artifacts, never committed)
+compat/screenshots/
+# Smoke app builds (CI only, WP5-12)
+smoke/*/dist/
+smoke/*/dist-server/
+smoke/*/.angular/
+smoke/next/.next/
+smoke/nuxt/.nuxt/
+smoke/nuxt/.output/
+smoke/astro/.astro/

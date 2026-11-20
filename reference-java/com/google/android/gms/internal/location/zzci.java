@@ -1,0 +1,30 @@
+package com.google.android.gms.internal.location;
+
+import android.app.PendingIntent;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.internal.TaskUtil;
+import com.google.android.gms.location.GeofenceStatusCodes;
+import com.google.android.gms.tasks.TaskCompletionSource;
+
+final class zzci extends zzl {
+    final TaskCompletionSource zza;
+
+    zzci(TaskCompletionSource taskCompletionSource) {
+        this.zza = taskCompletionSource;
+    }
+
+    @Override
+    public final void zzb(int i, String[] strArr) {
+        TaskUtil.setResultOrApiException(new Status(GeofenceStatusCodes.zza(i)), this.zza);
+    }
+
+    @Override
+    public final void zzc(int i, PendingIntent pendingIntent) {
+        TaskUtil.setResultOrApiException(new Status(GeofenceStatusCodes.zza(i)), this.zza);
+    }
+
+    @Override
+    public final void zzd(int i, String[] strArr) {
+        TaskUtil.setResultOrApiException(new Status(GeofenceStatusCodes.zza(i)), this.zza);
+    }
+}

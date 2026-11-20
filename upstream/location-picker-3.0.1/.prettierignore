@@ -1,0 +1,29 @@
+dist/
+coverage/
+node_modules/
+test-results/
+_site/
+playwright-report/
+blob-report/
+*.tgz
+package-lock.json
+custom-elements.json
+src/compat/location-picker.min.js
+test/compat/v1.lock
+site/llms-full.txt
+compat/compat.json
+COMPATIBILITY.md
+smoke/*/dist/
+smoke/*/dist-server/
+smoke/*/.angular/
+smoke/next/.next/
+smoke/nuxt/.nuxt/
+smoke/nuxt/.output/
+smoke/astro/.astro/
+
+# Legacy files that their owners replace (WP7 rewrites these docs); drop the lines then.
+CONTRIBUTING.md
+code-of-conduct.md
+
+# Agent worktrees (git-excluded, not part of the repo).
+.claude/

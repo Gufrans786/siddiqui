@@ -1,0 +1,23 @@
+package com.facebook.react.viewmanagers;
+
+import android.view.View;
+import com.facebook.react.uimanager.BaseViewManager;
+import com.facebook.react.uimanager.BaseViewManagerDelegate;
+import com.facebook.react.uimanager.LayoutShadowNode;
+import com.facebook.react.viewmanagers.RNSFullWindowOverlayManagerInterface;
+
+public class RNSFullWindowOverlayManagerDelegate<T extends View, U extends BaseViewManager<T, ? extends LayoutShadowNode> & RNSFullWindowOverlayManagerInterface<T>> extends BaseViewManagerDelegate<T, U> {
+    public RNSFullWindowOverlayManagerDelegate(BaseViewManager baseViewManager) {
+        super(baseViewManager);
+    }
+
+    @Override
+    public void kotlinCompat$setProperty(T t, String str, Object obj) {
+        str.hashCode();
+        if (str.equals("accessibilityContainerViewIsModal")) {
+            ((RNSFullWindowOverlayManagerInterface) this.mViewManager).setAccessibilityContainerViewIsModal(t, obj == null ? true : ((Boolean) obj).booleanValue());
+        } else {
+            super.kotlinCompat$setProperty(t, str, obj);
+        }
+    }
+}

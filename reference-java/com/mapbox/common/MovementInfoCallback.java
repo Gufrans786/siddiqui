@@ -1,0 +1,7 @@
+package com.mapbox.common;
+
+import com.mapbox.bindgen.Expected;
+
+public interface MovementInfoCallback {
+    void run(Expected<String, MovementInfo> expected);
+}

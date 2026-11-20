@@ -1,0 +1,24 @@
+.class public Lim/zego/zim/entity/ZIMCallEndConfig;
+.super Ljava/lang/Object;
+.source "ZIMCallEndConfig.java"
+
+
+# instance fields
+.field public extendedData:Ljava/lang/String;
+
+.field public pushConfig:Lim/zego/zim/entity/ZIMPushConfig;
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 1
+
+    .line 17
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    const-string v0, ""
+
+    iput-object v0, p0, Lim/zego/zim/entity/ZIMCallEndConfig;->extendedData:Ljava/lang/String;
+
+    return-void
+.end method

@@ -1,0 +1,58 @@
+{
+  "source_kind": "Complete supplied decoded/decompiled app source plus current editable custom source and full picker upstream",
+  "original_app_source_archive": {
+    "name": "Locate_GO_4.1.0_AutoBid_Custom_Distance_source.zip",
+    "sha256": "e44eed1770a31f9ac18f735115307fca4c0d552cdff7e8b5d5f8d4ce454fb51e"
+  },
+  "original_picker_archive": {
+    "name": "location-pick.zip",
+    "sha256": "09c042f88a415b19b352b88e4d3be9f6eb9e3297416ddd867cf9de19905f1d3a"
+  },
+  "release": {
+    "name": "Locate_GO_4.1.0_Compact_English_v3.apk",
+    "sha256": "3b5af4fa463cbaab6f875617f20584f7170b04354d8f6c9fa18affb4210d9709"
+  },
+  "member_groups_before_inventory_file": {
+    ".gitignore": 1,
+    "BUILD_GUIDE.md": 1,
+    "FULL_SOURCE_README.md": 1,
+    "KIMI_START_HERE.txt": 1,
+    "LOCATION_PICKER_NOTES.txt": 1,
+    "MGS_Offline_Password_Generator.html": 1,
+    "PORTING_GUIDE.md": 1,
+    "apk-project": 39873,
+    "autobid-java": 11,
+    "autobid-obfuscation.pro": 1,
+    "build.py": 1,
+    "generator-android": 5,
+    "location-hooks": 6,
+    "location-picker-web": 70,
+    "migration": 6,
+    "native-tests": 19,
+    "reference-java": 19491,
+    "reference-js": 1,
+    "upstream": 344
+  },
+  "original_app_members_retained_or_updated": 59373,
+  "current_overlay_input_files": 129,
+  "missing_original_developer_material": [
+    "React Native/TypeScript repository",
+    "Original Gradle project",
+    "Original JS source maps",
+    "C/C++ sources for packaged native libraries"
+  ],
+  "not_included": [
+    "Private signing keys",
+    "Root Key.txt",
+    "Runtime session/device data",
+    "User screenshots",
+    "node_modules",
+    "Build/cache/browser downloads"
+  ],
+  "read_first": [
+    "FULL_SOURCE_README.md",
+    "BUILD_GUIDE.md",
+    "PORTING_GUIDE.md",
+    "KIMI_START_HERE.txt"
+  ]
+}

@@ -1,0 +1,31 @@
+package com.google.android.gms.internal.location;
+
+import android.location.Location;
+import com.google.android.gms.common.api.internal.ListenerHolder;
+
+final class zzcz extends com.google.android.gms.location.zzt {
+    private final zzcs zza;
+
+    zzcz(zzcs zzcsVar) {
+        this.zza = zzcsVar;
+    }
+
+    @Override
+    public final void zzd(Location location) {
+        this.zza.zza().notifyListener(new zzcx(this, location));
+    }
+
+    @Override
+    public final void zze() {
+        this.zza.zza().notifyListener(new zzcy(this));
+    }
+
+    final zzcz zzf(ListenerHolder listenerHolder) {
+        this.zza.zzc(listenerHolder);
+        return this;
+    }
+
+    final void zzg() {
+        this.zza.zza().clear();
+    }
+}

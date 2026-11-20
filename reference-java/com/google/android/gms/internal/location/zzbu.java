@@ -1,0 +1,23 @@
+package com.google.android.gms.internal.location;
+
+import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Result;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.internal.BaseImplementation;
+
+abstract class zzbu extends BaseImplementation.ApiMethodImpl {
+    public zzbu(GoogleApiClient googleApiClient) {
+        super((Api<?>) zzbp.zzb, googleApiClient);
+    }
+
+    @Override
+    public final Result createFailedResult(Status status) {
+        return status;
+    }
+
+    @Override
+    public final void setResult(Object obj) {
+        super.setResult((Result) obj);
+    }
+}

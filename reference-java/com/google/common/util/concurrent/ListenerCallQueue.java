@@ -1,0 +1,103 @@
+package com.google.common.util.concurrent;
+
+import androidx.core.app.NotificationCompat;
+import com.google.android.gms.common.internal.ServiceSpecificExtraArgs;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Queues;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.Executor;
+import java.util.logging.Level;
+
+@ElementTypesAreNonnullByDefault
+final class ListenerCallQueue<L> {
+    private static final LazyLogger logger = new LazyLogger(ListenerCallQueue.class);
+    private final List<PerListenerQueue<L>> listeners = Collections.synchronizedList(new ArrayList());
+
+    interface Event<L> {
+        void call(L listener);
+    }
+
+    ListenerCallQueue() {
+    }
+
+    public void addListener(L listener, Executor executor) {
+        Preconditions.checkNotNull(listener, ServiceSpecificExtraArgs.CastExtraArgs.LISTENER);
+        Preconditions.checkNotNull(executor, "executor");
+        this.listeners.add(new PerListenerQueue<>(listener, executor));
+    }
+
+    public void enqueue(Event<L> event) {
+        enqueueHelper(event, event);
+    }
+
+    public void enqueue(Event<L> event, String label) {
+        enqueueHelper(event, label);
+    }
+
+    private void enqueueHelper(Event<L> event, Object label) {
+        Preconditions.checkNotNull(event, NotificationCompat.CATEGORY_EVENT);
+        Preconditions.checkNotNull(label, "label");
+        synchronized (this.listeners) {
+            Iterator<PerListenerQueue<L>> it = this.listeners.iterator();
+            while (it.hasNext()) {
+                it.next().add(event, label);
+            }
+        }
+    }
+
+    public void dispatch() throws Exception {
+        for (int i = 0; i < this.listeners.size(); i++) {
+            this.listeners.get(i).dispatch();
+        }
+    }
+
+    private static final class PerListenerQueue<L> implements Runnable {
+        final Executor executor;
+        boolean isThreadScheduled;
+        final L listener;
+        final Queue<Event<L>> waitQueue = Queues.newArrayDeque();
+        final Queue<Object> labelQueue = Queues.newArrayDeque();
+
+        PerListenerQueue(L l, Executor executor) {
+            this.listener = (L) Preconditions.checkNotNull(l);
+            this.executor = (Executor) Preconditions.checkNotNull(executor);
+        }
+
+        synchronized void add(Event<L> event, Object label) {
+            this.waitQueue.add(event);
+            this.labelQueue.add(label);
+        }
+
+        void dispatch() throws Exception {
+            boolean z;
+            synchronized (this) {
+                if (this.isThreadScheduled) {
+                    z = false;
+                } else {
+                    z = true;
+                    this.isThreadScheduled = true;
+                }
+            }
+            if (z) {
+                try {
+                    this.executor.execute(this);
+                } catch (Exception e) {
+                    synchronized (this) {
+                        this.isThreadScheduled = false;
+                        ListenerCallQueue.logger.get().log(Level.SEVERE, "Exception while running callbacks for " + this.listener + " on " + this.executor, (Throwable) e);
+                        throw e;
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void run() throws java.lang.Throwable {
+            throw new UnsupportedOperationException("Method not decompiled: com.google.common.util.concurrent.ListenerCallQueue.PerListenerQueue.run():void");
+        }
+    }
+}

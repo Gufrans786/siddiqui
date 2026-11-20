@@ -1,0 +1,118 @@
+Locate Go 4.1.0 - Compact English v3
+
+Use
+---
+Update the previous working v2 APK with Compact English v3. Open the app,
+press Volume Up, select Location picker > Choose on map, choose a point,
+and tap Save location. The card shows Active app location. The app's
+location state, map camera location, native Mapbox puck and AutoBid distance
+calculations use that selected point. Selection persists after restart.
+Use real GPS removes the point, refreshes the app/map from cached actual
+fixes and requests a new actual GPS fix. Cancel does not apply edits.
+
+Implementation
+--------------
+AppLocationOverride.java owns app-local manual location and immediate
+refresh. Live TSLocation construction receives the selected coordinates
+before the plugin's normal persistence/HTTP serialization. The React Native
+JSON bridge and current-position callback use the same selection. Both
+RNMBX LocationEngineResult and Mapbox's independent native puck consumer
+are adapted; this covers the default LocationPuck used by the shipping map.
+Manual points are identified by locatego_manual provider/source/extra.
+Existing mock flags and unrelated metadata are not cleared.
+
+Five focused classes in location-hooks/smali add eight method hooks:
+- RNBackgroundGeolocationModule: module registration, JSON, current position.
+- TSLocation: adapt a live Android Location before the record is constructed.
+- RNMBX LocationManager: register for immediate map state refresh.
+- RNMBX LocationEngineResult: adapt current and last-known results.
+- LocationComponentPluginImpl: register and adapt the default native puck.
+
+AutoBidRuntime initializes the app context. LocationPickerCard applies the
+selection immediately and restores actual GPS on request. AutoBidService
+uses the same active point, including when an order is retried.
+The supplied location-picker 3.0.1 source remains unchanged. Its MapLibre
+adapter is used with a bundled MapLibre engine/worker and OpenFreeMap
+Liberty vector style. The user chose this keyless English map because no
+Google Maps API key was available. This build does not use Google Maps.
+All 20 place/road label layers prefer name:en, name_en or Latin transliteration;
+the Arabic/local-name fallback is omitted. Road reference numbers remain.
+Map attribution stays visible, and provider/style license notices are bundled.
+Only map tiles, sprites, glyphs and TileJSON from tiles.openfreemap.org load
+remotely; all executable code remains local. Manual coordinates work offline.
+
+Compact panel
+-------------
+Driver session and All orders cards are not created or shown. Automatic
+session capture remains active. Saving filters no longer writes a stale
+hidden token/driver snapshot. Existing All orders preference is preserved.
+The panel uses a white header, subtle bordered sections, smaller typography,
+compact fields/switches, and a fixed Close / Save & apply footer. Width is
+capped at 420dp and height at 620dp / 76% of the screen. The picker viewport
+is 176px inside a 352dp editor. English labels and left-to-right layout are
+explicit. The proven v2 native location hooks are unchanged.
+
+Build (Python 3.11+, JDK 17, Android SDK platform/build-tools 36)
+-------------------------------------------------------------
+Keep both original supplied files beside LocateGo-AutoBid-source:
+  Locate_GO_4.1.0_AutoBid_Custom_Distance.apk
+  Locate_GO_4.1.0_AutoBid_Custom_Distance_source.zip
+Alternatively set BASE_APK and BASE_SOURCE to their absolute paths.
+The original APK SHA-256 must match:
+c216274bacbf8d7dd607a0f9ce7daf657026ec0bec8c26c5a19bd11b5faef942
+
+PowerShell environment:
+  $env:ANDROID_HOME = 'C:\path\to\Android\Sdk'
+  $env:ANDROID_PLATFORM = 'android-36'
+  $env:ANDROID_BUILD_TOOLS = '36.0.0'
+  $env:JAVA_HOME = 'C:\path\to\jdk-17'
+  $env:APKTOOL_JAR = 'C:\path\to\apktool_3.0.3.jar'
+  python build.py
+
+The source ZIP includes all changed Java, the five complete hook classes,
+assembler, picker sources/assets, and tests. The original classes4 sources
+are read from the extracted original project or extracted from BASE_SOURCE.
+The builder assembles those sources with only the five substitutions,
+compiles/R8-processes the Java overlay, replaces classes4.dex/classes6.dex,
+adds picker assets, aligns and optionally signs. Original resources,
+manifest, classes1-3/5 and native libraries are preserved byte for byte.
+
+For UI-only releases, optionally set LOCATION_HOOKS_APK to the known working
+Locate_GO_4.1.0_Location_Fix_v2.apk. Its pinned SHA-256 is checked and the exact
+classes4.dex is reused. This delivered v3 uses that path; all five hook sources
+and AppLocationOverride were also checked against the v2 source ZIP.
+Without this variable, the same hook sources are assembled normally; DEX
+metadata order may vary between parallel assembler runs.
+
+Set KEYSTORE, KEYSTORE_PASSWORD and optionally KEYSTORE_ALIAS to sign.
+Without KEYSTORE, an unsigned APK is produced. No private signing key is
+included in the source ZIP. The delivered APK uses the same local debug
+certificate as the previous working v2 APK, allowing an update to
+that build. The original Custom Distance APK uses a different certificate.
+
+Tests
+-----
+  python native-tests/run.py
+  cd location-picker-web
+  npm ci
+  npx playwright install chromium
+  npm test
+
+Native tests execute the production override/preferences classes using JVM
+fixtures for Android/React Native/Mapbox, and the real org.json library.
+They cover immediate app-state and native puck changes, later actual GPS
+fixes, signed/zero coordinates, invalid inputs, persistence, current-position
+callbacks, JSON metadata preservation and actual GPS restoration.
+Five Chromium checks cover picker save/cancel/restore/range/offline input,
+English label selection, map viewport sizing and visible zoom controls.
+The optional test/smoke-public-map.mjs checks real map data using only the
+public Eiffel Tower landmark. No user-selected coordinates are read or sent
+by that test. The first online test using user-selected coordinates was
+rejected by automatic approval review; the public-landmark alternative ran
+successfully with no errors.
+These checks do not replace an end-to-end test on an Android phone. No
+phone was connected; the local emulator image is missing its kernel.
+
+The bundled org.json:json:20240303 test dependency is Public Domain:
+https://github.com/stleary/JSON-java/blob/master/LICENSE
+Location-picker, MapLibre, OpenFreeMap and Liberty license files are included in the web assets.

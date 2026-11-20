@@ -1,0 +1,20 @@
+package com.google.android.play.core.integrity;
+
+public abstract class IntegrityTokenRequest {
+
+    public static abstract class Builder {
+        public abstract IntegrityTokenRequest build();
+
+        public abstract Builder setCloudProjectNumber(long j);
+
+        public abstract Builder setNonce(String str);
+    }
+
+    public static Builder builder() {
+        return new f();
+    }
+
+    public abstract Long cloudProjectNumber();
+
+    public abstract String nonce();
+}

@@ -1,0 +1,58 @@
+package com.mapbox.common;
+
+import com.mapbox.bindgen.RecordUtils;
+import java.io.Serializable;
+import java.util.Objects;
+
+public class TileRegionEstimateProgress implements Serializable {
+    private final long completedResourceCount;
+    private final long erroredResourceCount;
+    private final TileRegionEstimateResult partialResult;
+    private final long requiredResourceCount;
+
+    public TileRegionEstimateProgress(long j, long j2, long j3, TileRegionEstimateResult tileRegionEstimateResult) {
+        this.requiredResourceCount = j;
+        this.erroredResourceCount = j2;
+        this.completedResourceCount = j3;
+        this.partialResult = tileRegionEstimateResult;
+    }
+
+    public long getRequiredResourceCount() {
+        return this.requiredResourceCount;
+    }
+
+    public long getErroredResourceCount() {
+        return this.erroredResourceCount;
+    }
+
+    public long getCompletedResourceCount() {
+        return this.completedResourceCount;
+    }
+
+    public TileRegionEstimateResult getPartialResult() {
+        return this.partialResult;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        TileRegionEstimateProgress tileRegionEstimateProgress = (TileRegionEstimateProgress) obj;
+        return this.requiredResourceCount == tileRegionEstimateProgress.requiredResourceCount && this.erroredResourceCount == tileRegionEstimateProgress.erroredResourceCount && this.completedResourceCount == tileRegionEstimateProgress.completedResourceCount && Objects.equals(this.partialResult, tileRegionEstimateProgress.partialResult);
+    }
+
+    public int hashCode() {
+        return Objects.hash(Long.valueOf(this.requiredResourceCount), Long.valueOf(this.erroredResourceCount), Long.valueOf(this.completedResourceCount), this.partialResult);
+    }
+
+    public String toString() {
+        return "[requiredResourceCount: " + RecordUtils.fieldToString(Long.valueOf(this.requiredResourceCount)) + ", erroredResourceCount: " + RecordUtils.fieldToString(Long.valueOf(this.erroredResourceCount)) + ", completedResourceCount: " + RecordUtils.fieldToString(Long.valueOf(this.completedResourceCount)) + ", partialResult: " + RecordUtils.fieldToString(this.partialResult) + "]";
+    }
+
+    static {
+        BaseMapboxInitializer.init(MapboxSDKCommonInitializerImpl.class);
+    }
+}

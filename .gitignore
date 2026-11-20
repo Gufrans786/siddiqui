@@ -1,0 +1,7 @@
+/build/
+/apk-project/build/
+/apk-project/dist/
+/location-picker-web/node_modules/
+/native-tests/build/
+/migration/.test-temp/
+__pycache__/

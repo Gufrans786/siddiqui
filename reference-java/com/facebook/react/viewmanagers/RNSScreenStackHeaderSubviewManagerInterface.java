@@ -1,0 +1,12 @@
+package com.facebook.react.viewmanagers;
+
+import android.view.View;
+import com.facebook.react.uimanager.ViewManagerWithGeneratedInterface;
+
+public interface RNSScreenStackHeaderSubviewManagerInterface<T extends View> extends ViewManagerWithGeneratedInterface {
+    void setHidesSharedBackground(T t, boolean z);
+
+    void setSynchronousShadowStateUpdatesEnabled(T t, boolean z);
+
+    void setType(T t, String str);
+}

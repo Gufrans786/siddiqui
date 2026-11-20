@@ -1,0 +1,22 @@
+.class public Lim/zego/zim/entity/ZIMCacheConfig;
+.super Ljava/lang/Object;
+.source "ZIMCacheConfig.java"
+
+
+# instance fields
+.field public cachePath:Ljava/lang/String;
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 1
+
+    .line 16
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    const-string v0, ""
+
+    iput-object v0, p0, Lim/zego/zim/entity/ZIMCacheConfig;->cachePath:Ljava/lang/String;
+
+    return-void
+.end method

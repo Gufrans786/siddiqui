@@ -1,0 +1,48 @@
+package com.mapbox.maps;
+
+import com.mapbox.bindgen.RecordUtils;
+import com.mapbox.common.BaseMapboxInitializer;
+import com.mapbox.maps.loader.MapboxMapsInitializerImpl;
+import java.io.Serializable;
+import java.util.Objects;
+
+public final class QueriedSourceFeature implements Serializable {
+    private final QueriedFeature queriedFeature;
+    private final FeaturesetQueryTarget target;
+
+    public QueriedSourceFeature(QueriedFeature queriedFeature, FeaturesetQueryTarget featuresetQueryTarget) {
+        this.queriedFeature = queriedFeature;
+        this.target = featuresetQueryTarget;
+    }
+
+    public QueriedFeature getQueriedFeature() {
+        return this.queriedFeature;
+    }
+
+    public FeaturesetQueryTarget getTarget() {
+        return this.target;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        QueriedSourceFeature queriedSourceFeature = (QueriedSourceFeature) obj;
+        return Objects.equals(this.queriedFeature, queriedSourceFeature.queriedFeature) && Objects.equals(this.target, queriedSourceFeature.target);
+    }
+
+    public int hashCode() {
+        return Objects.hash(this.queriedFeature, this.target);
+    }
+
+    public String toString() {
+        return "[queriedFeature: " + RecordUtils.fieldToString(this.queriedFeature) + ", target: " + RecordUtils.fieldToString(this.target) + "]";
+    }
+
+    static {
+        BaseMapboxInitializer.init(MapboxMapsInitializerImpl.class);
+    }
+}

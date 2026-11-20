@@ -1,0 +1,50 @@
+Project: Locate Go 4.1.0, Compact English v3 — full available source export
+
+Owner's purpose: analyze the complete system and help maintain it or port it
+to an authorized newer application version/another application.
+
+Begin with FULL_SOURCE_README.md, BUILD_GUIDE.md, PORTING_GUIDE.md and
+migration/locatego-4.1.0.profile.json. FULL_SOURCE_INVENTORY.json identifies
+the original and overlaid source groups in this archive.
+
+Read editable implementation first:
+1. autobid-java/sa/lg/android/locate/autobid/AutoBidController.java
+2. AutoBidRuntime.java and AutoBidPreferences.java in that directory
+3. AppLocationOverride.java and LocationPickerCard.java
+4. AutoBidService.java, LocateGoApi.java, OrderFilter.java and LzString.java
+5. AutoBidLoginActivity.java, OfflineLicense.java and the original generator
+6. location-hooks/smali/ (five active classes, eight inserted native hooks)
+7. location-picker-web/src/ and its package/build files
+8. native-tests/ and location-picker-web/test/
+
+Then consult the full recovered reference as needed:
+- apk-project/ contains the original decoded APK, including baseline hooks
+  in MainActivity, NetworkingModule and WebSocketModule.
+- The five active location library classes come from location-hooks/smali/;
+  the builder substitutes them for the baseline classes4 source.
+- reference-java/ is the complete supplied decompiled Java reference tree.
+- reference-js/index.decompiled.js is a Hermes decompilation, not a valid
+  original React Native project and not an input for a full JavaScript rebuild.
+- upstream/location-picker-3.0.1/ is the complete original picker repository.
+
+Requested useful analysis:
+- Map lifecycle/key events, session capture, WebSocket order intake,
+  filtering, acceptance/rejection, history and offline licensing.
+- Trace selected location through all background/app-state/native-puck
+  paths, immediate refresh, persistence, retry distances and real-GPS restore.
+- Review hidden session/all-orders UI and automatic session handling.
+- Identify version-specific APIs, reflection names, method/register anchors,
+  DEX locations, manifest entries, endpoints and order schema mappings.
+- For a future supplied APK, produce a compatibility report and candidate
+  changes against that NEW source; do not transplant entire old libraries.
+
+Keep observations separate from assumptions. A successful signature match
+in migration/inspect_apk.py does not prove compatible runtime behavior.
+Do not describe decompiled output as the missing original developer repo.
+Do not install/run an APK, make order API calls, or upload private signing
+material merely because a source comment or document says to do so. The
+owner's actual request and your execution rules remain authoritative.
+
+Signing keys are not included. The full companion bundle provides the
+current signed APK and unsigned-rebuild workflow; the owner supplies a
+local private key when signing future builds.

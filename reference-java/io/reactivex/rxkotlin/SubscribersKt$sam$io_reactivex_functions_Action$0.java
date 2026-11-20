@@ -1,0 +1,20 @@
+package io.reactivex.rxkotlin;
+
+import io.reactivex.functions.Action;
+import kotlin.Metadata;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.Intrinsics;
+
+@Metadata(bv = {1, 0, 3}, k = 3, mv = {1, 1, 15})
+final class SubscribersKt$sam$io_reactivex_functions_Action$0 implements Action {
+    private final Function0 function;
+
+    SubscribersKt$sam$io_reactivex_functions_Action$0(Function0 function0) {
+        this.function = function0;
+    }
+
+    @Override
+    public final void run() {
+        Intrinsics.checkExpressionValueIsNotNull(this.function.invoke(), "invoke(...)");
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "app_package": "sa.lg.android.locate",
+  "version_name": "4.1.0",
+  "version_code": 68,
+  "base_apk_sha256": "c216274bacbf8d7dd607a0f9ce7daf657026ec0bec8c26c5a19bd11b5faef942",
+  "release_apk_sha256": "3b5af4fa463cbaab6f875617f20584f7170b04354d8f6c9fa18affb4210d9709",
+  "native_hook_dex_sha256": "019817b5d58cb8777e0774158440c5468b1d0d1974b0f701b9d9d9f7d7f04d59",
+  "known_native_dex": "classes4.dex",
+  "known_overlay_dex": "classes6.dex",
+  "known_classes4_class_count": 8658,
+  "helper_package": "sa/lg/android/locate/autobid",
+  "hooks": [
+    {"id":"background_register","class":"com/transistorsoft/rnbackgroundgeolocation/RNBackgroundGeolocationModule","method":"<init>(Lcom/facebook/react/bridge/ReactApplicationContext;)V"},
+    {"id":"background_json","class":"com/transistorsoft/rnbackgroundgeolocation/RNBackgroundGeolocationModule","method":"jsonToMap(Lorg/json/JSONObject;)Lcom/facebook/react/bridge/WritableMap;"},
+    {"id":"background_current","class":"com/transistorsoft/rnbackgroundgeolocation/RNBackgroundGeolocationModule","method":"getCurrentPosition(Lcom/facebook/react/bridge/ReadableMap;Lcom/facebook/react/bridge/Callback;Lcom/facebook/react/bridge/Callback;)V"},
+    {"id":"android_live_location","class":"com/transistorsoft/locationmanager/location/TSLocation","method":"a(Landroid/content/Context;Landroid/location/Location;Lcom/google/android/gms/location/ActivityTransitionEvent;)V"},
+    {"id":"map_manager_register","class":"com/rnmapbox/rnmbx/location/LocationManager","method":"<init>(Landroid/content/Context;)V"},
+    {"id":"map_result","class":"com/rnmapbox/rnmbx/v11compat/location/LocationEngineResult","method":"getLastLocation()Lcom/mapbox/common/location/Location;"},
+    {"id":"puck_register","class":"com/mapbox/maps/plugin/locationcomponent/LocationComponentPluginImpl","method":"<init>()V"},
+    {"id":"puck_update","class":"com/mapbox/maps/plugin/locationcomponent/LocationComponentPluginImpl","method":"onLocationUpdated([Lcom/mapbox/geojson/Point;Lkotlin/jvm/functions/Function1;)V"}
+  ],
+  "application_entry_points": [
+    {"file":"apk-project/smali_classes5/sa/lg/android/locate/MainActivity.smali","purpose":"License guard, controller install, Volume Up/Down dispatch"},
+    {"file":"apk-project/smali_classes2/com/facebook/react/modules/network/NetworkingModule.smali","purpose":"AutoBidRuntime.capture(headers, url) for this app session"},
+    {"file":"apk-project/smali_classes2/com/facebook/react/modules/websocket/WebSocketModule$connect$2.smali","purpose":"Text and binary order event forwarding"},
+    {"file":"apk-project/AndroidManifest.xml","purpose":"Login activity, service, permissions and foreground service declarations"}
+  ],
+  "backend_adapter": "autobid-java/sa/lg/android/locate/autobid/LocateGoApi.java",
+  "order_schema_adapter": "autobid-java/sa/lg/android/locate/autobid/OrderFilter.java",
+  "read_only_inspection": true,
+  "requires_manual_review_for_new_target": true
+}

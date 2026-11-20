@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; worker-src 'self'; child-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tiles.openfreemap.org; connect-src https://tiles.openfreemap.org; base-uri 'none'; form-action 'none'">
+  <link rel="stylesheet" href="picker.css">
+  <title>Choose a location</title>
+</head>
+<body>
+  <div id="map" aria-label="Choose a location on the map"></div>
+  <p id="status" role="status">Drag the map to choose a point. English street labels.</p>
+  <form id="coordinates" novalidate>
+    <div class="fields">
+      <label>Latitude<input id="latitude" type="text" inputmode="decimal" autocomplete="off" placeholder="-90 to 90"></label>
+      <label>Longitude<input id="longitude" type="text" inputmode="decimal" autocomplete="off" placeholder="-180 to 180"></label>
+    </div>
+    <button id="move" type="submit">Move pin</button>
+  </form>
+  <div class="actions">
+    <button id="cancel" type="button">Cancel</button>
+    <button id="save" type="button">Save location</button>
+  </div>
+  <script src="picker.js"></script>
+</body>
+</html>
